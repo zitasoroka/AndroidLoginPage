@@ -32,28 +32,19 @@ public class MainActivity extends AppCompatActivity {
         ed2=(EditText)findViewById(R.id.editText2);
 
 
-
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ed1.getText().toString().equals(getString(R.string.admin)) &&
 
-                        ed2.getText().toString().equals(getString(R.string.admin))) {
+                if (correctLogin(ed1.getText().toString(), ed2.getText().toString())){
+
                     Toast.makeText(getApplicationContext(), R.string.redirecting,Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(v.getContext(), SecondActivity.class);
                     startActivity(intent);
                 }
-                else{
-                    AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
-                    alertDialog.setTitle(R.string.alert);
-                    alertDialog.setMessage(getString(R.string.error_message));
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                    alertDialog.show();
+                else {
+
+                    alertDialog();
 
                 }
             }
@@ -67,9 +58,29 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public boolean checker(String s){
+    public void alertDialog() {
 
-        return true;
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle(R.string.alert);
+        alertDialog.setMessage(getString(R.string.error_message));
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, getString(R.string.ok),
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
+
+    }
+
+    public boolean correctLogin(String name, String password){
+
+        if (name.equals(getString(R.string.admin)) && password.equals(getString(R.string.admin))){
+                    return true;
+        }
+        else {
+            return false;
+        }
 
     }
 
