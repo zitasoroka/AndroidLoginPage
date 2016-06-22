@@ -10,15 +10,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class MainActivity extends AppCompatActivity {
+
+    //public MainActivity(){}
 
 
     Button b1,b2;
     EditText ed1,ed2;
-    TextView tx1;
 
 
     @Override
@@ -31,22 +32,14 @@ public class MainActivity extends AppCompatActivity {
         b2=(Button)findViewById(R.id.button2);
         ed2=(EditText)findViewById(R.id.editText2);
 
+        addNumbers(3, 4);
+
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if (correctLogin(ed1.getText().toString(), ed2.getText().toString())){
-
-                    Toast.makeText(getApplicationContext(), R.string.redirecting,Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(v.getContext(), SecondActivity.class);
-                    startActivity(intent);
-                }
-                else {
-
-                    alertDialog();
-
-                }
+                loginOnClickAction(v);
             }
         });
 
@@ -56,6 +49,20 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void loginOnClickAction(View v) {
+        if (correctLogin(ed1.getText().toString(), ed2.getText().toString())){
+
+            Toast.makeText(getApplicationContext(), R.string.redirecting,Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(v.getContext(), SecondActivity.class);
+            startActivity(intent);
+        }
+        else {
+
+            alertDialog();
+
+        }
     }
 
     public void alertDialog() {
@@ -75,12 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
     public boolean correctLogin(String name, String password){
 
-        if (name.equals(getString(R.string.admin)) && password.equals(getString(R.string.admin))){
-                    return true;
-        }
-        else {
-            return false;
-        }
+        //String val=getString(R.string.admin);
+        String val="admin";
+        LoginValidator validator=new LoginValidator(val,val);
+
+        return validator.validateLogin(name,password);
 
     }
 
@@ -104,5 +110,9 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public int addNumbers(int num1, int num2) {
+        return num1 + num2;
     }
 }
