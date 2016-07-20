@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    //public MainActivity(){}
-
-
     Button b1,b2;
     EditText ed1,ed2;
 
@@ -31,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
         ed1=(EditText)findViewById(R.id.editText);
         b2=(Button)findViewById(R.id.button2);
         ed2=(EditText)findViewById(R.id.editText2);
-
-        addNumbers(3, 4);
-
 
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,9 +104,5 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public int addNumbers(int num1, int num2) {
-        return num1 + num2;
     }
 }
